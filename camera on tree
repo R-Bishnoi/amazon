@@ -1,0 +1,41 @@
+
+
+In this we take 3 condition:
+1. If the node have camera = 0.
+2. If the node is Covered by camera = 1.
+3. If the node is not covered so it need camera = -1
+
+
+
+class Solution {
+public:
+    
+    int cameraCheck(TreeNode* root, int& camera){
+        if(root==NULL){
+            return 1;
+        }
+        int leftChild=cameraCheck(root->left, camera);
+        int rightChild=cameraCheck(root->right,camera);
+        
+        if(leftChild==-1 || rightChild==-1){
+            camera++;
+            return 0;
+        }
+        if(leftChild==0 || rightChild==0){
+            return 1;
+        }
+        return -1;        
+        
+    }
+    
+    
+    int minCameraCover(TreeNode* root) {
+        
+        int camera=0;
+        
+        if(cameraCheck(root,camera)==-1){
+            camera++;
+        }
+        return camera;
+    }
+};
