@@ -1,0 +1,47 @@
+//approach 1 is using stack 
+//approach 2 is using Rcount,pre,s[i]
+
+
+class Solution {
+public:
+    int countCollisions(string s) {
+        int n=s.size();
+        int ans=0;
+    int Rcount=0;
+        if(s[0]=='R')Rcount=1;
+        char pre=s[0];
+        
+    for(int i=1;i<n;i++){
+        
+       if(s[i]=='L'){
+           
+         if(pre=='R'){
+             ans+=Rcount+1;
+             pre='S';
+             Rcount=0;
+         } 
+           
+          else if(pre=='S'){
+              ans++;
+          }
+         } 
+        
+        else if(s[i]=='S'){
+         
+            if(pre=='R'){
+                ans+=Rcount;
+                Rcount=0;
+            }
+            pre='S';    
+        }
+        
+        else{ 
+            pre='R';
+            Rcount++;      
+        }   
+    }   
+        return ans;
+     
+    }
+};
+
