@@ -1,0 +1,31 @@
+//simple postorder traversal
+
+//you can simple go to each and every node and just check out that if there is no coin is present then
+//you need to 1 swap till now
+//if coin present then you need abs(node->val - 1)
+//and return curr-1;
+
+
+//hint :: ager aapko phele left or right chaiye to hmesa post order traversal kro
+class Solution {
+public:
+    int ans=0;
+    int solve(TreeNode* root){
+        if(root==NULL)return 0;
+        int l=solve(root->left);
+        int r=solve(root->right);
+        
+       int curr=l+r+root->val;
+        ans+=abs(curr-1);
+        return curr-1;
+    }
+    
+    
+    int distributeCoins(TreeNode* root) {
+        
+     solve(root);
+        return ans;
+        
+        
+    }
+};
