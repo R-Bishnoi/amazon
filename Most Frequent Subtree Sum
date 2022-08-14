@@ -1,0 +1,51 @@
+
+
+class Solution {
+public:
+    
+int solve(TreeNode* root,unordered_map<int,int>&mp){
+
+     if(root==NULL)return 0;
+     
+     int l=solve(root->left,mp);
+     int r=solve(root->right,mp);
+     
+   mp[l+r+root->val]++;
+    return l+r+root->val;
+   }   
+    
+ 
+    vector<int> findFrequentTreeSum(TreeNode* root) {
+        
+   unordered_map<int,int>mp;
+        
+    solve(root,mp);
+        
+    vector<int>v;    
+        
+      int f=0; 
+        int a;
+    for(auto x:mp){
+        if(f==0){
+       a=x.second;
+          v.push_back(x.first);
+            f=1;
+        }
+        else{
+           int b=x.second;
+            if(b>a){
+                v.clear();
+                v.push_back(x.first);
+                a=b;
+            }
+            else if(b==a){
+                v.push_back(x.first);
+            }
+        }
+        
+    }
+        
+        return v;
+        
+    }
+};
