@@ -1,0 +1,28 @@
+class Solution {
+public:
+    
+    
+int solve(TreeNode* root){
+    if(root==NULL)return 0;
+        
+        int l=solve(root->left);
+        int r=solve(root->right);
+        
+    if(l==0)root->left=NULL;
+    if(r==0)root->right=NULL;
+        
+        return (l+r+root->val);      
+}  
+        
+    
+    TreeNode* pruneTree(TreeNode* root) {
+        
+        if(root==NULL)return NULL;
+        
+      solve(root);
+        if(root->val==0&&root->left==NULL&&root->right==NULL)return NULL;
+        return root;
+        
+        
+    }
+};
