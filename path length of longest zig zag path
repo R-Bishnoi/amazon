@@ -1,0 +1,37 @@
+
+
+class Solution {
+public:
+    
+pair<int,pair<int,int>> solve(TreeNode* root){
+                            //mxlen , forward , backward
+        if(root==NULL)return {0,{-1,-1}};
+        
+    pair<int,pair<int,int>> l=solve(root->left);
+    pair<int,pair<int,int>> r=solve(root->right);
+        
+ 
+ pair<int,pair<int,int>> ans;
+    ans.first=max(max(l.first,r.first),max(l.second.second,r.second.first)+1);
+    
+    ans.second.first=l.second.second+1;
+    ans.second.second=r.second.first+1;
+    
+    return ans;
+        
+        
+    }
+    
+    
+    int longestZigZag(TreeNode* root) {
+        
+      
+        if(root==NULL)return 0;
+        
+    pair<int,pair<int,int>>res= solve(root);
+        
+     return res.first;   
+        
+    }
+       
+};
