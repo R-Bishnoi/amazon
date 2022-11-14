@@ -1,0 +1,97 @@
+/*
+Ques(1)
+Make a tree-like structure where every level has i nodes where i is the level number and right link of the 1st node and 
+left link of the 2nd node in a layer points to the same node.
+*/
+
+
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+class TreeNode{
+    public:
+    int data;
+    TreeNode* left;
+    TreeNode* right;
+    
+  TreeNode(int val){
+      data=val;
+      left=NULL;
+      right=NULL;
+  }
+};
+
+
+
+void pre(TreeNode* root){
+    if(root==NULL)return;
+    
+    cout<<root->data <<" ";
+    
+    pre(root->left);
+    pre(root->right);
+}
+
+
+int main(){
+    
+    int n;
+    cin>>n;
+    int k=1;
+    TreeNode* root=new TreeNode(k++);
+    
+    queue<TreeNode*>q;
+    q.push(root);
+for(int i=2;i<=n;i++){
+    
+    if(i==2){
+       TreeNode* l=new TreeNode(k++);
+       TreeNode* r=new TreeNode(k++);
+       TreeNode* temp=q.front();
+       q.pop();
+       
+       temp->left=l;
+       temp->right=r;
+       q.push(l);
+       q.push(r);
+       continue;
+       
+    }
+    
+    
+    int m=q.size();
+    int count=0;
+    TreeNode* prev=NULL;
+   for(int i=0;i<m;i++){
+       TreeNode* pemp=q.front();
+       q.pop();
+       
+       if(count==1){
+           pemp->left=prev->right;
+       }
+       
+       else{
+           TreeNode* lf=new TreeNode(k++);
+           pemp->left=lf;
+           q.push(lf);
+       }
+       
+       TreeNode* rf=new TreeNode(k++);
+       pemp->right=rf;
+       q.push(rf);
+       
+       prev=pemp;
+       count++;
+   }
+    
+}
+
+
+pre(root);
+
+    
+    return 0;
+}
